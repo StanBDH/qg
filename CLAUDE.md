@@ -7,7 +7,8 @@ Interface unique où Stan lit et tranche ce qui l'attend dans tous ses espaces :
 Vite + React + TypeScript, `@supabase/supabase-js`. Aucune autre dépendance sans raison écrite.
 - Base : Supabase, organisation « Stan QG » (plan gratuit), projet « qg-stan » (`kcxdldvgrhogtwwvmpru`), région Irlande. Schéma : `supabase/migrations/`. Connecteur dédié « Supabase QG », limité à ce projet ; le connecteur « Supabase » ne voit que KSG.
 - Hébergement : GitHub Pages (dépôt StanBDH/qg, publication par `.github/workflows/pages.yml` à chaque push sur main). Jamais l'équipe Vercel « KSG Connect », jamais l'organisation Supabase « ksgsolutions.ch » (cloisonnement : facture de KSG).
-- Accès : code à usage unique par e-mail (Supabase Auth). La RLS n'ouvre les tables qu'aux adresses de `qg_acces`.
+- Accès : lien (ou code) envoyé par e-mail (Supabase Auth, envoi par défaut : il n'écrit qu'aux membres de l'organisation, donc à contact@ksgsolutions.ch). La RLS n'ouvre les tables qu'aux adresses de `qg_acces`. Pour un vrai code ou une autre adresse : brancher un SMTP (Resend), puis éditer les modèles d'e-mail.
+- En ligne : https://stanbdh.github.io/qg/ (dépôt public : jamais de chiffre interne ni de planche de design dans le dépôt, `qg-design/` reste local).
 - Contrôles : `npm run build` (typage + build) et `node src/tri.check.ts`.
 
 ## Écrire dans le QG depuis une session (étape 1 et suivantes)
