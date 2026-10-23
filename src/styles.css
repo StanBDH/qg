@@ -68,3 +68,4 @@ h1 { margin: 0; font-size: 44px; line-height: 1.05; font-weight: 800; letter-spa
   .ligne .espace { flex-basis: 100%; }
   .ligne .actions, .ligne .actions button { flex: 1 1 0; }
 }
+.connexion .consigne { margin: 0; color: var(--gris); }

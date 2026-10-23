@@ -33,7 +33,8 @@ function Connexion() {
     e.preventDefault()
     setOccupe(true); setErreur('')
     const { error } = etape === 'email'
-      ? await supabase.auth.signInWithOtp({ email: email.trim().toLowerCase() })
+      // ponytail: l'e-mail par défaut de Supabase porte un lien ; un code demande un envoi d'e-mails dédié (SMTP).
+      ? await supabase.auth.signInWithOtp({ email: email.trim().toLowerCase(), options: { emailRedirectTo: location.origin + import.meta.env.BASE_URL } })
       : await supabase.auth.verifyOtp({ email: email.trim().toLowerCase(), token: code.trim(), type: 'email' })
     setOccupe(false)
     if (error) return setErreur(etape === 'email' ? "Le code n'a pas pu être envoyé. Réessaie dans une minute." : 'Code incorrect ou expiré.')
@@ -48,11 +49,12 @@ function Connexion() {
           <>
             <label htmlFor="email">Ton adresse e-mail</label>
             <input id="email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            <button className="primaire" disabled={occupe}>Recevoir un code</button>
+            <button className="primaire" disabled={occupe}>Recevoir mon accès</button>
           </>
         ) : (
           <>
-            <label htmlFor="code">Code reçu à {email}</label>
+            <p className="consigne">Un e-mail vient de partir à {email}. Ouvre le lien qu'il contient sur cet appareil, ou tape ci-dessous le code s'il en donne un.</p>
+            <label htmlFor="code">Code reçu</label>
             <input id="code" inputMode="numeric" autoComplete="one-time-code" required value={code} onChange={(e) => setCode(e.target.value)} />
             <button className="primaire" disabled={occupe}>Entrer</button>
             <button type="button" className="lien" onClick={() => { setEtape('email'); setCode('') }}>Changer d'adresse</button>
